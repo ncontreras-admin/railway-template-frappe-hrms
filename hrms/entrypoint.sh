@@ -47,6 +47,8 @@ if [ ! -f "sites/$SITE_NAME/site_config.json" ]; then
   runuser -u frappe -- bench --site "$SITE_NAME" install-app helpdesk
 else
   runuser -u frappe -- bench --site "$SITE_NAME" migrate
+  runuser -u frappe -- bench --site "$SITE_NAME" install-app helpdesk || true
+  runuser -u frappe -- bench --site "$SITE_NAME" migrate
 fi
 
 runuser -u frappe -- bench --site "$SITE_NAME" clear-cache
