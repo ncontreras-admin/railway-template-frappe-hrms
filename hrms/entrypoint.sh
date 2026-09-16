@@ -44,6 +44,7 @@ if [ ! -f "sites/$SITE_NAME/site_config.json" ]; then
     --no-mariadb-socket
   runuser -u frappe -- bench --site "$SITE_NAME" install-app erpnext
   runuser -u frappe -- bench --site "$SITE_NAME" install-app hrms
+  runuser -u frappe -- bench --site "$SITE_NAME" install-app helpdesk
 else
   runuser -u frappe -- bench --site "$SITE_NAME" migrate
 fi
