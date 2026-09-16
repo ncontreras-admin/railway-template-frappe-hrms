@@ -45,9 +45,10 @@ if [ ! -f "sites/$SITE_NAME/site_config.json" ]; then
   runuser -u frappe -- bench --site "$SITE_NAME" install-app erpnext
   runuser -u frappe -- bench --site "$SITE_NAME" install-app hrms
   runuser -u frappe -- bench --site "$SITE_NAME" install-app helpdesk
+  runuser -u frappe -- bench --site "$SITE_NAME" install-app crm
 else
-  runuser -u frappe -- bench --site "$SITE_NAME" migrate
   runuser -u frappe -- bench --site "$SITE_NAME" install-app helpdesk || true
+  runuser -u frappe -- bench --site "$SITE_NAME" install-app crm || true
   runuser -u frappe -- bench --site "$SITE_NAME" migrate
 fi
 
