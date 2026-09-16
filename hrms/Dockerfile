@@ -8,13 +8,14 @@ RUN apt-get update \
 USER frappe
 WORKDIR /home/frappe/frappe-bench
 RUN bench get-app --branch v16.18.1 https://github.com/frappe/hrms \
+    && bench get-app https://github.com/frappe/helpdesk \
     && bench build \
     && grep -Fq '"website.bundle.css"' sites/assets/assets.json \
     && grep -Fq '"erpnext-web.bundle.css"' sites/assets/assets.json \
     && grep -Fq '"hrms.bundle.css"' sites/assets/assets.json \
     && rm -rf /home/frappe/frappe-bench/assets \
     && cp -r /home/frappe/frappe-bench/sites/assets /home/frappe/frappe-bench/assets
-
+    
 USER root
 COPY entrypoint.sh /usr/local/bin/hrms-entrypoint
 COPY supervisord.conf /etc/supervisor/conf.d/hrms.conf
